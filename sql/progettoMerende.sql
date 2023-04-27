@@ -1,7 +1,5 @@
-IPOTESI:
-1. La descrizione della classe è il nome della classe per gli studenti (compreso il capoclasse) e bar per gli addetti al bar
-2. il tipo su utente è "studente", "capoclasse", "gestore
--------------------------------------------------------------------------------------------------
+--La descrizione della classe è il nome della classe per gli studenti (compreso il capoclasse) e bar per gli addetti al bar
+--il tipo su utente è "studente", "capoclasse", "gestore
 
 Create table classe(
     descrizione varchar(20) primary key
