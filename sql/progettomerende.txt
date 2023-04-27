@@ -1,7 +1,11 @@
-Create table classe(
-descrizione varchar(20) primary key
-);
+IPOTESI:
+1. La descrizione della classe è il nome della classe per gli studenti (compreso il capoclasse) e bar per gli addetti al bar
+2. il tipo su utente è "studente", "capoclasse", "gestore
+-------------------------------------------------------------------------------------------------
 
+Create table classe(
+    descrizione varchar(20) primary key
+);
 
 CREATE TABLE utenti(
     cf varchar(16) PRIMARY KEY,
@@ -49,8 +53,6 @@ CREATE TABLE promozione(
     id_pro int AUTO_INCREMENT PRIMARY KEY,
     descrizione varchar(30)
     )
-
------------------------------------------------------
 
 CREATE TABLE prenotazione_prodotto(
     id_pp int AUTO_INCREMENT PRIMARY KEY,
