@@ -1,5 +1,6 @@
---La descrizione della classe è il nome della classe per gli studenti (compreso il capoclasse) e bar per gli addetti al bar
---il tipo su utente è "studente", "capoclasse", "gestore
+--La descrizione della classe è il nome della classe per gli studenti (compreso il capoclasse) e bar per gli addetti al bar;
+--il tipo su utente è "studente", "capoclasse", "gestore;
+--il voto della recensione va da 1 a 5;
 
 Create table classe(
     descrizione varchar(20) primary key
