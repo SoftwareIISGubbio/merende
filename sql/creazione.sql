@@ -48,7 +48,9 @@ CREATE TABLE allergene(
     
 CREATE TABLE promozione(
     id_promozione int AUTO_INCREMENT PRIMARY KEY,
-    descrizione varchar(30)
+    descrizione varchar(30),
+    inizio date,
+    fine date
     );
     
 CREATE TABLE prenotazione_prodotto(
@@ -70,11 +72,9 @@ CREATE TABLE allergene_prodotto(
     
 CREATE TABLE promozione_prodotto(
     id_promozione_prodotto int AUTO_INCREMENT PRIMARY KEY,
-    inzio date,
-    fine date,
     sconto int,
     fk_id_promozione int,
-    FOREIGN KEY (fk_id_promoziobne) REFERENCES promozione(id_promozione) on DELETE CASCADE on update CASCADE,
+    FOREIGN KEY (fk_id_promozione) REFERENCES promozione(id_promozione) on DELETE CASCADE on update CASCADE,
     fk_id_prodotto int,
     FOREIGN KEY (fk_id_prodotto) REFERENCES prodotto(id_prodotto) on DELETE CASCADE on update CASCADE
    );

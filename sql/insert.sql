@@ -35,11 +35,11 @@ INSERT INTO recensione (id_recensione, voto, descrizione, fk_cf, fk_id_prodotto)
 INSERT INTO recensione (id_recensione, voto, descrizione, fk_cf, fk_id_prodotto) VALUES (null, 2, 'cornetto ghiaccio', 'SRNLCA', 5);
 
 -- INSERT TABELLA PROMOZIONI
-INSERT INTO promozione (id_promozione, descrizione) VALUES (null, 'promozione natale');
-INSERT INTO promozione (id_promozione, descrizione) VALUES (null, 'promozione pasqua');
-INSERT INTO promozione (id_promozione, descrizione) VALUES (null, 'sconti ceri');
-INSERT INTO promozione (id_promozione, descrizione) VALUES (null, 'sconti hallowen');
-INSERT INTO promozione (id_promozione, descrizione) VALUES (null, 'promozione lunedi');
+INSERT INTO promozione (id_promozione, descrizione, inizio, fine) VALUES (null, 'promozione natale', '2022-12-23', '2023-01-09');
+INSERT INTO promozione (id_promozione, descrizione, inizio, fine) VALUES (null, 'promozione pasqua', '2023-01-09', '2023-01-09');
+INSERT INTO promozione (id_promozione, descrizione, inizio, fine) VALUES (null, 'sconti ceri', '2023-04-09', '2023-04-16');
+INSERT INTO promozione (id_promozione, descrizione, inizio, fine) VALUES (null, 'sconti hallowen', '2022-05-11', '2022-07-11');
+INSERT INTO promozione (id_promozione, descrizione, inizio, fine) VALUES (null, 'promozione lunedi', '2022-06-15', '2022-06-21');
 
 -- INSERT TABELLA ALLERGENI
 INSERT INTO allergene (id_allergene, nome) VALUES (null, 'glutine');
@@ -63,8 +63,8 @@ INSERT INTO prenotazione_prodotto(id_prenotazione_prodotto, quantita, fk_id_pren
 INSERT INTO prenotazione_prodotto(id_prenotazione_prodotto, quantita, fk_id_prenotazione, fk_id_prodotto) VALUES (null, 1, 3, 3);
 
 -- INSERT TABELLA PROMOZIONI_PRODOTTO
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (1, '2022-12-23', '2023-01-09', 30, 1, 1);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (2, '2023-01-09', '2023-01-09', 20, 2, 5);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (3, '2023-04-09', '2023-04-16', 25, 5, 2);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (4, '2022-05-11', '2022-07-11', 30, 4, 2);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (5, '2022-06-15', '2022-06-21', 30, 3, 4);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (1, 30, 1, 1);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (2, 20, 2, 5);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (3, 25, 5, 2);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (4, 30, 4, 2);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (5, 30, 3, 4);
