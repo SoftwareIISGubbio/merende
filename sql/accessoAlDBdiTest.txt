@@ -1,0 +1,4 @@
+Per accedere al DB su Talos, andare all'indirizzo: http:\\10.1.0.52\phpmyadmin
+
+Utente: progetto5i
+Password: progetto5i
