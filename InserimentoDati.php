@@ -10,8 +10,8 @@
     <?php
         //print_r($_POST);
         $servername = "localhost";
-        $user = "roberto";
-        $pwd = "roberto";
+        $user = "root";
+        $pwd = "root";
         $db = "merende";
 
         $connessione = mysqli_connect($servername,$user,$pwd,$db);
@@ -28,44 +28,40 @@
             CIBO: <select name="prodotto">
 
     <?php 
-        $query = "SELECT * FROM  prodotto";
+        $query = "SELECT prodotto.nome FROM  prodotto";
         $risultato = mysqli_query($connessione,$query);
 
         if(mysqli_num_rows($risultato)>0){
 
             while($riga = mysqli_fetch_array($risultato)){
-                //non so perchè vuole sempre il secondo da prendere
-                //chiedere al prof
-                echo ("<option value=${riga['id_prod']}>${riga['nome']} ${riga['prezzo']}</option>");
+                echo ("<option value=${riga['id_prod']}>${riga['nome']}</option>");
             }
         }
-        mysqli_close($connessione);
-      
+
+        
     ?>
- 
-    </select>
-    <input type="submit" value="Aggiungi">
+        </select>
+        <input type="submit" value="aggiungi">
         <br><br>
         RICREAZIONE:
         <br><br>
         1: <input type="radio" name="ricreazione" value="1">
         2: <input type="radio" name="ricreazione" value="2">
         <br><br>
-        <input type="submit" value="invia Prenotazione">
+        <input type="submit" value="invia">
         <input type="reset" value="cancella">
-        <br></br>
-        <textarea id="resoconto" rows="5" cols="33"></textarea>
     </form>
 <?php
 }else{
 
-    $ID = $_POST['id_prod'];
+    $id_prod = $_POST['id_prod'];
     $ricreazione = $_POST['ricreazione'];
-    $data = $_POST['data_pre'];
-    $CF = $_POST['FK_cf'];
+    $data = $_POST['data'];
+    $cf = $_POST['fk_cf'];
 
-    $inserisciDati = "INSERT INTO prenotazione (id_pre,ricreazione,data_pre,FK_cf)
-     VALUES ($ID,$ricreazione,2022-1-1,1)";
+
+    $inserisciDati = "INSERT INTO prenotazione (id_pre,ricreazione,data_pre,fk_cf)
+     VALUES ($id_prod,$ricreazione,$data,$cf)";
     echo ("prima: ".$inserisciDati);
 
     $risultato1 = mysqli_query($connessione,$inserisciDati);
@@ -76,6 +72,10 @@
     }
     mysqli_close($connessione);
 }
+
+/*if(!isset($_POST['aggiungi'])){
+    echo();
+}*/
 ?>
 </body>
 </html>
