@@ -63,8 +63,9 @@ INSERT INTO prenotazione_prodotto(id_prenotazione_prodotto, quantita, fk_id_pren
 INSERT INTO prenotazione_prodotto(id_prenotazione_prodotto, quantita, fk_id_prenotazione, fk_id_prodotto) VALUES (null, 1, 3, 3);
 
 -- INSERT TABELLA PROMOZIONI_PRODOTTO
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (1, 30, 1, 1);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (2, 20, 2, 5);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (3, 25, 5, 2);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (4, 30, 4, 2);
-INSERT INTO promozione_prodotto (id_promozione_prodotto, inzio, fine, sconto, fk_id_promozione, fk_id_prodotto) VALUES (5, 30, 3, 4);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, sconto, fk_id_promozione, fk_id_prodotto) VALUES (null, 30, 1, 1);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, sconto, fk_id_promozione, fk_id_prodotto) VALUES (null, 20, 2, 5);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, sconto, fk_id_promozione, fk_id_prodotto) VALUES (null, 25, 5, 2);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, sconto, fk_id_promozione, fk_id_prodotto) VALUES (null, 30, 4, 2);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, sconto, fk_id_promozione, fk_id_prodotto) VALUES (null, 30, 3, 4);
+INSERT INTO promozione_prodotto (id_promozione_prodotto, sconto, fk_id_promozione, fk_id_prodotto) VALUES (null, 30, 1, 5);
