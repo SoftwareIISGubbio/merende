@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TotemPubblicitario</title>
+
+    <script>
+        "use strict"
+        let httpRequest;
+        let httpRequest2;
+
+        function paginaCaricata() {
+            httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = cerca;
+            httpRequest.open('GET', 'http://10.1.0.174:8080/prodotto/elenco');
+            httpRequest.send();
+            httpRequest2 = new XMLHttpRequest();
+            httpRequest2.onreadystatechange = cerca2;
+            httpRequest2.open('GET', 'http://10.1.0.174:8080/promozione/elenco');
+            httpRequest2.send();
+        }
+
+        function cerca() {
+            if (httpRequest.readyState == XMLHttpRequest.DONE) {
+                if (httpRequest.status == 200) {
+                    let oggetto = JSON.parse(httpRequest.responseText);
+                    for(let i=0; i<oggetto.length; i++){
+                        let nom = oggetto[i].nome;
+                        let pre = oggetto[i].prezzo;
+                        let lDiv = document.createElement("div");  
+                        let lCont = document.getElementById("cont");  
+                        let lNome = document.createElement("label");                                                     
+                        let lPrezzo = document.createElement("label");
+                        lNome.innerText = nom + " = ";
+                        lPrezzo.innerText = pre + "€";
+                        lCont.appendChild(lDiv);
+                        lDiv.appendChild(lNome);
+                        lDiv.appendChild(lPrezzo);
+                        
+                    }
+                } else {
+                    let lErrore = document.getElementById("pErrore")
+                    lErrore.innerText = "ERRORE";
+                }
+            }
+        }
+
+    </script>
+
+</head>
+<style>
+    h1 {
+        text-align: center;
+    }
+    body {
+        background-color: blue;
+    }
+    #cont{
+        background-color: blueviolet;
+    }
+    #contprom {
+        background-color: orangered;
+    }
+</style>
+<body onload="paginaCaricata()">
+    <h1 id="pErrore">Menu delle merende</h1>
+    <div id="cont"></div>
+    <div id="contprom"></div>
+</body>
+
+</html>
