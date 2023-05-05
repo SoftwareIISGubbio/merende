@@ -28,12 +28,20 @@ public class ProdottoManager {
     public List<Prodotto> cerca(
     	@RequestParam(required = false) Integer id,
         @RequestParam(required = false) String nome,
-        @RequestParam(required = false) Double prezzo
+        @RequestParam(required = false) Double prezzo,
+        @RequestParam(required = false) Integer calorie,
+        @RequestParam(required = false) Double grassi,
+        @RequestParam(required = false) Double zuccheri,
+        @RequestParam(required = false) Double proteine
     ) {
     	Prodotto t = new Prodotto();
         t.setId(id);
         t.setNome(nome);
         t.setPrezzo(prezzo);
+        t.setCalorie(calorie);
+        t.setGrassi(grassi);
+        t.setProteine(proteine);
+        t.setZuccheri(zuccheri);
         Example<Prodotto> example = Example.of(t);
         return repoToDo.findAll( example );
     }
