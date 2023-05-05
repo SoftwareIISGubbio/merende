@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TotemPubblicitario</title>
+    <title>Totem pubblicitario</title>
 
     <script>
         "use strict"
@@ -45,6 +45,35 @@
                 }
             }
         }
+        function cerca2() {
+            if (httpRequest2.readyState == XMLHttpRequest.DONE) {
+                if (httpRequest2.status == 200) {
+                    let oggetto2 = JSON.parse(httpRequest2.responseText);
+                    for(let i=0; i<oggetto2.length; i++){
+                        let desc = oggetto2[i].descrizione;
+                        let iP = oggetto2[i].inizio;
+                        let fP = oggetto2[i].fine;
+                        let lDiv = document.createElement("div");  
+                        let lCont = document.getElementById("contprom");  
+                        let lDesc = document.createElement("label");
+                        let lIP = document.createElement("label");
+                        let lFP = document.createElement("label");
+                        lDesc.innerText = desc + ": ";
+                        lIP.innerText = "Dal " + iP + " al ";
+                        lFP.innerText = fP;
+                        lCont.appendChild(lDiv);
+                        lDiv.appendChild(lDesc);
+                        lDiv.appendChild(lIP);
+                        lDiv.appendChild(lFP);
+                
+                    }
+                } else {
+                    let lErrore = document.getElementById("pErrore")
+                    lErrore.innerText = "ERRORE";
+                }
+            }
+        }
+
 
     </script>
 
@@ -52,21 +81,24 @@
 <style>
     h1 {
         text-align: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        background-color: aliceblue;
+        color: orangered;
     }
     body {
-        background-color: blue;
+        background-image: url("sfondomenu.jpg");
     }
     #cont{
-        background-color: blueviolet;
+        background-color: white;
     }
     #contprom {
         background-color: orangered;
     }
 </style>
 <body onload="paginaCaricata()">
-    <h1 id="pErrore">Menu delle merende</h1>
-    <div id="cont"></div>
+    <h1 id="pErrore">Menu merende</h1>
     <div id="contprom"></div>
+    <div id="cont"></div>
 </body>
 
 </html>
