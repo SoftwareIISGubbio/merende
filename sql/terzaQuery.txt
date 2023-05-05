@@ -1,0 +1,36 @@
+
+-->Statistiche sulla salute di un utente in un tempo indeterminato
+SELECT utente.nome, utente.cognome, SUM(prodotto.grassi*prenotazione_prodotto.quantita) as Grassi, SUM(prodotto.proteine*prenotazione_prodotto.quantita) as Proteine, SUM(prodotto.zuccheri*prenotazione_prodotto.quantita) as Zuccheri, SUM(prodotto.calorie*prenotazione_prodotto.quantita) as Calorie
+FROM prodotto, prenotazione_prodotto, prenotazione,utente
+WHERE utente.cf=prenotazione.fk_cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prodotto.id_prodotto=prenotazione_prodotto.fk_id_prodotto AND utente.cf="PRTLRT"
+
+
+
+-->Statistiche sulla salute di un utente in un tempo determinato 
+SELECT utente.nome, utente.cognome, SUM(prodotto.grassi*prenotazione_prodotto.quantita) as Grassi, SUM(prodotto.proteine*prenotazione_prodotto.quantita) as Proteine, SUM(prodotto.zuccheri*prenotazione_prodotto.quantita) as Zuccheri, SUM(prodotto.calorie*prenotazione_prodotto.quantita) as Calorie
+FROM prodotto, prenotazione_prodotto, prenotazione,utente
+WHERE utente.cf=prenotazione.fk_cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prodotto.id_prodotto=prenotazione_prodotto.fk_id_prodotto AND utente.cf="PRTLRT"
+AND prenotazione.data_prenotazione BETWEEN "2023-01-15" AND "2023-04-01";
+
+
+
+-->Statistiche sulla salute di una classe in un tempo indeterminato 
+SELECT classe.descrizione, SUM(prodotto.grassi*prenotazione_prodotto.quantita) as Grassi, SUM(prodotto.proteine*prenotazione_prodotto.quantita) as Proteine, SUM(prodotto.zuccheri*prenotazione_prodotto.quantita) as Zuccheri, SUM(prodotto.calorie*prenotazione_prodotto.quantita) as Calorie
+FROM prodotto, prenotazione_prodotto, prenotazione,utente, classe
+WHERE utente.cf=prenotazione.fk_cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prodotto.id_prodotto=prenotazione_prodotto.fk_id_prodotto AND classe.descrizione=utente.fk_descrizione AND classe.descrizione="5i";
+
+
+
+-->Statistiche sulla salute di una classe in un tempo determinato
+SELECT classe.descrizione, SUM(prodotto.grassi*prenotazione_prodotto.quantita) as Grassi, SUM(prodotto.proteine*prenotazione_prodotto.quantita) as Proteine, SUM(prodotto.zuccheri*prenotazione_prodotto.quantita) as Zuccheri, SUM(prodotto.calorie*prenotazione_prodotto.quantita) as Calorie
+FROM prodotto, prenotazione_prodotto, prenotazione,utente, classe
+WHERE utente.cf=prenotazione.fk_cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prodotto.id_prodotto=prenotazione_prodotto.fk_id_prodotto AND classe.descrizione=utente.fk_descrizione AND classe.descrizione="5i"
+ AND prenotazione.data_prenotazione BETWEEN "2023-01-15" AND "2023-04-01";
+
+
+
+-->Statistiche sulla salute di tutte le classi in un tempo indeterminato
+SELECT classe.descrizione, SUM(prodotto.grassi*prenotazione_prodotto.quantita) as Grassi, SUM(prodotto.proteine*prenotazione_prodotto.quantita) as Proteine, SUM(prodotto.zuccheri*prenotazione_prodotto.quantita) as Zuccheri, SUM(prodotto.calorie*prenotazione_prodotto.quantita) as Calorie
+FROM prodotto, prenotazione_prodotto, prenotazione,utente, classe
+WHERE utente.cf=prenotazione.fk_cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prodotto.id_prodotto=prenotazione_prodotto.fk_id_prodotto AND classe.descrizione=utente.fk_descrizione  AND prenotazione.data_prenotazione
+GROUP BY utente.fk_descrizione;
