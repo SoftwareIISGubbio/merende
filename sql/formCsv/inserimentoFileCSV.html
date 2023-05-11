@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File CSV</title>
+
+    <style>
+        body{
+            font: inherit;
+            background-color: #EECD00;
+        }
+        .bottoni{
+            width: 7em;
+            height: 7em;
+        }
+        #scelta{
+            font-weight: bold;
+            font-style: inherit;
+        }
+    </style>
+</head>
+<body>
+    <img src="logoCassataGattapone.png" alt="logo IIS CASSATA-GATTAPONE" >
+    <br><br><br>
+    <form enctype="multipart/form-data" method="POST" action="inserimento.php">
+        <div id="scelta">SCEGLI IL TUO FILE: </div><input type="file" name="passaFile">
+        <br><br>
+        <input class="bottoni" type="submit" name="invia" value="invia file">
+        <input class="bottoni" type="reset" name="cancella" value="deseleziona">
+    </form>
+</body>
+</html>

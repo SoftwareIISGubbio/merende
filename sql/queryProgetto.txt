@@ -1,6 +1,0 @@
-merenda più richiesta
-
-1-SELECT prodotto.Nome, SUM(prenotazione_prodotto.Quantità) as somma
-from prodotto, prenotazione_prodotto, prenotazione
-WHERE prodotto.id_prodotto=prenotazione_prodotto.id_prodotto AND prenotazione.id_prenotazione=prenotazione_prodotto.id_prenotazione 
-GROUP BY prodotto.Nome ORDER BY somma desc LIMIT 1;
