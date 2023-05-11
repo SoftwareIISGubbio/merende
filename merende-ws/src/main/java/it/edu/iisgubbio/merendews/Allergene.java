@@ -2,6 +2,8 @@ package it.edu.iisgubbio.merendews;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,21 +12,24 @@ import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Allergene {
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id_al;
+	Integer id_allergene;
 	
-	/*@ManyToMany(mappedBy="allergeni")
-	Set<Prodotto> prodotto_allergene;
-*/
+	@JsonBackReference
+	@ManyToMany(mappedBy="allergene")
+	Set<Prodotto> allergene_prodotto;
+
 	String nome;
 
 	public Integer getId() {
-		return id_al;
+		return id_allergene;
 	}
 
 	public void setId(Integer id) {
-		this.id_al = id;
+		this.id_allergene = id;
 	}
 
 	public String getNome() {
@@ -36,19 +41,19 @@ public class Allergene {
 	}
 
 	public Integer getId_al() {
-		return id_al;
+		return id_allergene;
 	}
 
-	public void setId_al(Integer id_al) {
-		this.id_al = id_al;
+	public void setId_al(Integer id_allergene) {
+		this.id_allergene = id_allergene;
 	}
 
-	/*public Set<Prodotto> getProdotto_allergene() {
-		return prodotto_allergene;
+	public Set<Prodotto> getAllergene_prodotto() {
+		return allergene_prodotto;
 	}
 
-	public void setProdotto_allergene(Set<Prodotto> prodotto_allergene) {
-		this.prodotto_allergene = prodotto_allergene;
-	}*/
+	public void setAllergene_prodotto(Set<Prodotto> allergene_prodotto) {
+		this.allergene_prodotto = allergene_prodotto;
+	}
 
 }

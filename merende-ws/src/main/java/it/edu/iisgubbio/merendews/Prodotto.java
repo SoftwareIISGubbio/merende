@@ -2,6 +2,8 @@ package it.edu.iisgubbio.merendews;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,12 +19,21 @@ public class Prodotto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id_prodotto;
 
-	/*@ManyToMany
+	@ManyToMany
+	@JsonManagedReference
 	@JoinTable(
 			name = "allergene_prodotto", 
-			joinColumns = @JoinColumn(name = "fk_id_prod"), 
-			inverseJoinColumns = @JoinColumn(name = "fk_id_al"))
-	Set<Allergene> allergeni;*/
+			joinColumns = @JoinColumn(name = "fk_id_prodotto"), 
+			inverseJoinColumns = @JoinColumn(name = "fk_id_allergene"))
+	Set<Allergene> allergene;
+	
+	@ManyToMany
+	@JsonManagedReference
+	@JoinTable(
+			name = "promozione_prodotto", 
+			joinColumns = @JoinColumn(name = "fk_id_prodotto"), 
+			inverseJoinColumns = @JoinColumn(name = "fk_id_promozione"))
+	Set<Promozione> promozione;
 
 	String nome;
 	Double prezzo;
@@ -49,12 +60,12 @@ public class Prodotto {
 	public void setPrezzo(Double prezzo) {
 		this.prezzo = prezzo;
 	}
-	/*public Set<Allergene> getAllergeni() {
-		return allergeni;
+	public Set<Allergene> getAllergene() {
+		return allergene;
 	}
-	public void setAllergeni(Set<Allergene> allergeni) {
-		this.allergeni = allergeni;
-	}*/
+	public void setAllergene(Set<Allergene> allergene) {
+		this.allergene = allergene;
+	}
 	public Integer getCalorie() {
 		return calorie;
 	}
