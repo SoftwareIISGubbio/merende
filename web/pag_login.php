@@ -11,15 +11,15 @@
     </style>
 </head>
 <body>
-<?php session_start();
+<?php 
+session_start();
+$errore="";
 if (isset($_SESSION['utente'])){
         echo ("bentornato");
         echo("<a href=pag_logout.php>logout</a>");
 }else{
     if(isset($_SESSION['errore'])){
-
-        $errore= "hai sbagliato la PASSWORD";
-        
+        $errore = $_SESSION['errore'];
     }
 ?>
     <form action="pag_utente.php" method="get">
@@ -35,11 +35,12 @@ if (isset($_SESSION['utente'])){
         <input type="submit" name="invia" value="invia">
     </ul>
     <ul>
-        <p id="errore"><?php $errore?></p>
+        <p id="errore"><?php echo($errore)?></p>
     </ul>
     </fieldset>
     </form>
 <?php }
+ 
 ?>
 </body>
 </html>

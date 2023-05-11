@@ -8,14 +8,16 @@
 <body>
     
     <?php
-        include ('connessione.php');
+        include ('connessione_db.php');
         session_start();
         $connection=mysqli_connect($server_name,$user,$psw,$nome_db);
         if(!$connection){
            die("errore".mysqli_connect_errno());
         }
         if(isset($_REQUEST['invia'])){
-
+            if(isset($_SESSION['errore'])){
+                unset($_SESSION['errore']);
+            }
             $query = "SELECT tipo
             from utente
             where utente='".$_REQUEST["user"] ."' AND password='".$_REQUEST["pwd"]."'";
@@ -25,7 +27,13 @@
             if($riga["tipo"]=="gestore" || $riga["tipo"]== "capoclasse"){
                 $_SESSION['utente']=$_REQUEST['user'];
                 $_SESSION['tipo']=$riga["tipo"];
-                echo("ciao ".$_SESSION['utente']." ruolo:".  $_SESSION['tipo'] );
+                if($riga['tipo']=="capoclasse"){
+                    header("Location:formCapoclasse.php");
+                }else{
+                    header("Location:formGestore.php");
+                }
+                //echo("ciao ".$_SESSION['utente']." ruolo:".  $_SESSION['tipo'] );
+                echo("<a href=pag_logout.php>logout</a>");
             }
             else if($riga["tipo"]=="alunno"){
                 $_SESSION['utente']=$_REQUEST['user'];
@@ -34,7 +42,7 @@
             }
         
             }else{
-                $_SESSION['errore']="hai sbagliato la PASSWORD";
+                $_SESSION['errore']="PASSWORD ERRATA";
                 header("Location:pag_login.php");
             }
 
