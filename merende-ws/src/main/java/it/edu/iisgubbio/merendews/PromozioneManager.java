@@ -1,5 +1,6 @@
 package it.edu.iisgubbio.merendews;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +28,15 @@ public class PromozioneManager {
     @GetMapping("/promozione")
     public List<Promozione> cerca(
     	@RequestParam(required = false) Integer id,
-        @RequestParam(required = false) String descrizione
+        @RequestParam(required = false) String descrizione,
+        @RequestParam(required = false) Date inizio,
+        @RequestParam(required = false) Date fine
     ) {
     	Promozione t = new Promozione();
         t.setId(id);
         t.setDescrizione(descrizione);
+        t.setInizio(inizio);
+        t.setFine(fine);
         Example<Promozione> example = Example.of(t);
         return repoToDo.findAll( example );
     }

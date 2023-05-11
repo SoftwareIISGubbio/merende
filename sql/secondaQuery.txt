@@ -1,6 +1,0 @@
-2)--classe con maggiore spesa--
-SELECT classe.descrizione,SUM(prodotto.prezzo*prenotazione_prodotto.quantita) as somma
-FROM classe, utenti, prenotazione, prenotazione_prodotto, prodotto
-WHERE classe.descrizione=utenti.fk_descrizione AND prenotazione.fk_cf=utenti.cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prodotto.id_prodotto=prenotazione_prodotto.fk_id_prodotto
-GROUP BY classe.descrizione ORDER BY somma DESC limit 1;
-
