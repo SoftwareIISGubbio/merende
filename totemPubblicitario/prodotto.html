@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Totem pubblicitario</title>
+
+    <script>
+        "use strict"
+        let httpRequest;
+
+        function paginaCaricata() {
+            httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = cerca;
+            httpRequest.open('GET', 'http://10.1.0.174:8080/prodotto/elenco');
+            httpRequest.send();
+        }
+
+        function cerca() {
+            if (httpRequest.readyState == XMLHttpRequest.DONE) {
+                if (httpRequest.status == 200) {
+                    let oggetto = JSON.parse(httpRequest.responseText);
+                    for(let i=0; i<oggetto.length; i++){
+                        let nom = oggetto[i].nome;
+                        let pre = oggetto[i].prezzo;
+                        let cal = oggetto[i].calorie;
+                        let gra = oggetto[i].grassi;
+                        let zuc = oggetto[i].zuccheri;
+                        let pro = oggetto[i].proteine;
+                        let lDiv = document.createElement("div");  
+                        let lCont = document.getElementById("cont");  
+                        let lNome = document.createElement("label");
+                        let lCalo = document.createElement("p"); 
+                        let lGrassi = document.createElement("p"); 
+                        let lZuccheri = document.createElement("p"); 
+                        let lProteine = document.createElement("p");                                                      
+                        let lPrezzo = document.createElement("label");
+                        lNome.innerText = nom + " = ";
+                        lPrezzo.innerText = pre + "€ ";
+                        lCalo.innerText = "Calorie: " + cal + ", ";
+                        lGrassi.innerText = "Grassi: " + gra + ", ";
+                        lZuccheri.innerText = "Zuccheri: " + zuc + ", ";
+                        lProteine.innerText = "Proteine : " + pro + " ";
+                        lCont.appendChild(lDiv);
+                        lDiv.appendChild(lNome);
+                        lDiv.appendChild(lPrezzo);
+                        lDiv.appendChild(lCalo);
+                        lDiv.appendChild(lGrassi);
+                        lDiv.appendChild(lZuccheri);
+                        lDiv.appendChild(lProteine);
+                        /* if (oggetto[i].allergene.length >= 0){
+                            for (let i2=0; i<oggetto[i].allergene.length; i++){
+                                let all = oggetto[i].allergene[i2].nome;
+                                let lDiv2 = document.createElement("div"); 
+                                let lAll = document.createElement("p"); 
+                                lAll.innerText = "Allergene: " + all + ", ";
+                                lDiv.appendChild(lDiv2);
+                                lDiv2.appendChild(lAll);
+                            } 
+                        } */
+                    }
+                } else {
+                    let lErrore = document.getElementById("pErrore")
+                    lErrore.innerText = "ERRORE";
+                }
+            }
+        }
+    </script>
+
+</head>
+<style>
+    h1 {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        background: rgba(255,255,255, 0.6);
+        color: black;
+    }
+    body {
+        background-image: url("legnomenu.jpg");
+        text-align: center;
+    }
+    #cont {
+        background: none;
+        border: none;
+    }
+    div {
+        width: auto;
+        margin: 25px;
+        border: 1px solid black;
+        padding: 10px;
+        background: rgba(255,255,255, 0.6);
+    }
+    label {
+        font-size: xx-large;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    p {
+        font-size: medium;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    button {
+        width: auto;
+        margin: 25px;
+        border: 1px solid black;
+        padding: 10px;
+        background: rgba(255,255,255, 0.6);
+        font-size: medium;
+    }
+</style>
+<body onload="paginaCaricata()">
+    <h1 id="pErrore">Menu merende</h1>
+    <div id="cont"></div>
+    <button onclick="window.location.href = 'promozione.html';">Tutte le promozioni!</button>
+</body>
+
+</html>
+
+
+
