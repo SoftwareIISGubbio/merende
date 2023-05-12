@@ -8,12 +8,14 @@
 <body>
     
     <?php
-        include ('connessione_db.php');
+        //NELLA SESSIONE SALVO NOME UTENTE E IL TIPO DELL'UTENTE E ANCHE L'ERRORE DELLA PASSWORD SE E' STATA SBAGLIATA
+        include ('connessione.php');
         session_start();
         $connection=mysqli_connect($server_name,$user,$psw,$nome_db);
         if(!$connection){
            die("errore".mysqli_connect_errno());
         }
+        
         if(isset($_REQUEST['invia'])){
             if(isset($_SESSION['errore'])){
                 unset($_SESSION['errore']);
