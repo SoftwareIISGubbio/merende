@@ -74,29 +74,27 @@
         if(!$connection){
            die("errore".mysqli_connect_errno());
         }
-        //print_r($_SESSION);
         if(isset($_SESSION['utente'])){
          
     ?>
-        <form method="POST" action="formStudenti.php">
+        <form method="POST" action="formCapoclasse.php">
             <div id= "barra_ricerca">
             GIORNI: <select name="giorni">
     <?php
-        $query=    "SELECT prenotazione.data_prenotazione, prenotazione.id_prenotazione, utente.nome
-        FROM prenotazione, utente
-        WHERE utente.tipo= 'alunno' AND prenotazione.fk_cf = utente.cf AND utente.utente ='".$_SESSION['utente']."'" ;
-        echo ($query);
+        $query="SELECT prenotazione.data_prenotazione, prenotazione.id_prenotazione, utente.nome, utente.fk_descrizione
+        FROM prenotazione, utente,classe
+        WHERE utente.tipo= 'capoclasse' AND prenotazione.fk_cf = utente.cf AND  classe.descrizione=(SELECT classe.descrizione FROM classe,utente WHERE utente.cf=".$_SESSION['utente']." AND utente.fk_descrizione=classe.descrizione) AND utente.fk_descrizione=classe.descrizione";                                   
         $ris = mysqli_query($connection, $query);
         if(mysqli_num_rows($ris)>0){
             while($riga = mysqli_fetch_assoc($ris)){
-                print_r($riga);
                 echo("<option value= ".$riga['id_prenotazione'].">".$riga['data_prenotazione'] ."</option>");       
             }
+            
         }
 
     ?>
         </select>
-        RICREAZIONE:  PRIMA<input value="1" type="radio" name="ricreazione"> SECONDA <input value="2" type="radio" name="ricreazione"> 
+        RICREAZIONE:  PRIMA<input value="1" type="radio" ccecked="true" name="ricreazione" checked> SECONDA <input value="2" type="radio" name="ricreazione"> 
         <input type="submit" value="cerca" name="cerca">
         </div>
         <br>
@@ -105,9 +103,14 @@
        if(isset($_REQUEST["cerca"])){
             
             $totale=0;
-            $query= "SELECT prodotto.nome ,prenotazione_prodotto.quantita, prodotto.prezzo 
+            /*$query= "SELECT prodotto.nome ,prenotazione_prodotto.quantita, prodotto.prezzo 
             from prodotto, prenotazione, prenotazione_prodotto, utente 
-            WHERE prenotazione.id_prenotazione=".$_POST['giorni']." and prenotazione.ricreazione=".$_POST['ricreazione'] ." and utente.utente='".$_SESSION['utente']."'"." AND prenotazione_prodotto.fk_id_prenotazione = prenotazione.id_prenotazione AND prenotazione_prodotto.fk_id_prodotto = prodotto.id_prodotto AND utente.cf = prenotazione.fk_cf";
+            WHERE prenotazione.id_prenotazione=".$_POST['giorni']." and prenotazione.ricreazione=".$_POST['ricreazione'] ." and utente.utente='".$_SESSION['utente']."'"." AND prenotazione_prodotto.fk_id_prenotazione = prenotazione.id_prenotazione AND prenotazione_prodotto.fk_id_prodotto = prodotto.id_prodotto AND utente.cf = prenotazione.fk_cf";*/
+            $query="SELECT utente.cf,prenotazione.id_prenotazione, prenotazione_prodotto.quantita,prodotto.nome,prodotto.prezzo, prenotazione.data_prenotazione
+            FROM prenotazione_prodotto, prenotazione, utente, prodotto,classe
+            WHERE utente.cf=prenotazione.fk_cf AND prenotazione.id_prenotazione=prenotazione_prodotto.fk_id_prenotazione AND prenotazione_prodotto.fk_id_prodotto=prodotto.id_prodotto
+            AND classe.descrizione=utente.fk_descrizione AND prenotazione.data_prenotazione=".$_POST['giorni']." AND prenotazione.ricreazione=".$_POST['ricreazione'] ." AND classe.descrizione=(SELECT classe.descrizione FROM classe,utente WHERE utente.cf=".$_SESSION['utente']." AND utente.fk_descrizione=classe.descrizione)                                                   
+            ORDER BY prenotazione.id_prenotazione";
             $ris= mysqli_query($connection, $query);
             if(mysqli_num_rows($ris)>0){
                 echo ("<fieldset>
@@ -116,7 +119,7 @@
                 echo ("<tr><td id="."prima".">NOME PRODOTTO</td><td id="."prima".">QUANTITA'</td><td id="."prima".">PREZZO</td></tr>");
                 while($riga = mysqli_fetch_assoc($ris)){
                     echo ("<tr><td>".$riga['nome']."</td><td>".$riga['quantita']."</td><td>".$riga['prezzo']."</td></tr>");
-                    $totale=$riga['quantita']*$riga['prezzo'];
+                    $totale+=$riga['quantita']*$riga['prezzo'];
                 }
                 ?>  
                 </table>
