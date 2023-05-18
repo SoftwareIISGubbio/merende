@@ -84,7 +84,7 @@
     <?php
         $query=    "SELECT prenotazione.data_prenotazione, prenotazione.id_prenotazione, utente.nome
         FROM prenotazione, utente
-        WHERE utente.tipo= 'alunno' AND prenotazione.fk_cf = utente.cf AND utente.utente ='".$_SESSION['utente']."'" ;
+        WHERE utente.tipo= 'alunno' AND prenotazione.fk_cf = utente.cf AND utente.cf ='".$_SESSION['utente']."'" ;
         echo ($query);
         $ris = mysqli_query($connection, $query);
         if(mysqli_num_rows($ris)>0){
@@ -116,7 +116,7 @@
                 echo ("<tr><td id="."prima".">NOME PRODOTTO</td><td id="."prima".">QUANTITA'</td><td id="."prima".">PREZZO</td></tr>");
                 while($riga = mysqli_fetch_assoc($ris)){
                     echo ("<tr><td>".$riga['nome']."</td><td>".$riga['quantita']."</td><td>".$riga['prezzo']."</td></tr>");
-                    $totale=$riga['quantita']*$riga['prezzo'];
+                    $totale+=$riga['quantita']*$riga['prezzo'];
                 }
                 ?>  
                 </table>
