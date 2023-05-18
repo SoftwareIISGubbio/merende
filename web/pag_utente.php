@@ -20,14 +20,14 @@
             if(isset($_SESSION['errore'])){
                 unset($_SESSION['errore']);
             }
-            $query = "SELECT tipo
+            $query = "SELECT tipo, cf
             from utente
             where utente='".$_REQUEST["user"] ."' AND password='".$_REQUEST["pwd"]."'";
             $ris = mysqli_query($connection, $query);
             if(mysqli_num_rows($ris)>0){
             $riga = mysqli_fetch_array($ris);
             if($riga["tipo"]=="gestore" || $riga["tipo"]== "capoclasse"){
-                $_SESSION['utente']=$_REQUEST['user'];
+                $_SESSION['utente']=$riga['cf'];
                 $_SESSION['tipo']=$riga["tipo"];
                 if($riga['tipo']=="capoclasse"){
                     header("Location:formCapoclasse.php");
@@ -38,7 +38,7 @@
                 echo("<a href=pag_logout.php>logout</a>");
             }
             else if($riga["tipo"]=="alunno"){
-                $_SESSION['utente']=$_REQUEST['user'];
+                $_SESSION['utente']=$riga['cf'];
                 $_SESSION['tipo']=$riga["tipo"];
                 header("Location:formStudenti.php");
             }
