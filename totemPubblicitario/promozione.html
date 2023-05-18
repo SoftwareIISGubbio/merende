@@ -37,6 +37,7 @@
                             };
                         }
                         compareDates(iP, today, fP);
+                        let lMom = document.createElement("div"); 
                         let lDiv = document.createElement("div");  
                         let lCont = document.getElementById("contprom");  
                         let lDesc = document.createElement("label");
@@ -44,6 +45,8 @@
                         let lT = document.createElement("label");
                         lDesc.innerText = desc + ": ";
                         lP.innerText = "Dal " + iP + " al " + fP;
+                        lMom.id = "madre";
+                        lDiv.className = "con";
                         if (pAtt == true) {
                             lT.innerText = "Attiva ";
                             lDiv.id = "att";
@@ -51,7 +54,8 @@
                             lT.innerText = "Non attiva ";
                             lDiv.id = "natt";
                         }
-                        lCont.appendChild(lDiv);
+                        lCont.appendChild(lMom);
+                        lMom.appendChild(lDiv);
                         lDiv.appendChild(lDesc);
                         lDiv.appendChild(lT);
                         lDiv.appendChild(lP);
@@ -81,18 +85,32 @@
         background: none;
         border: none;
     }
+    #madre {
+        background: none;
+        border: none;
+        display: grid;
+        grid-template-columns:1fr 1fr 1fr;
+        grid-template-rows:1fr;
+        grid-gap: 1rem;
+    }
     #att {
         background: rgba(50,205,50, 0.6);
     }
     #natt {
         background: rgba(247, 25, 9, 0.6);
     }
+    .con {
+        width: 60vw;
+    }
     div {
+        text-align: center;
         width: auto;
-        margin: 25px;
+        margin: 5px;
         border: 1px solid black;
         padding: 10px;
         background: rgba(255,255,255, 0.6);
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
     }
     label {
         font-size: xx-large;
